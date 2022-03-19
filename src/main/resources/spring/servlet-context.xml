@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"	
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+	
+    <context:component-scan base-package="core">
+       <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+       <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service"/>
+       <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Repository"/>
+    </context:component-scan>
+	
+    <!-- Argument Resolver -->
+    <mvc:annotation-driven>
+    	<mvc:argument-resolvers>
+    	    <bean class="core.fw.resolver.smartArgumentResolver"/>    	
+    	</mvc:argument-resolvers>
+    </mvc:annotation-driven>
+
+	<!-- Exception Resolver -->
+	<bean class="core.fw.resolver.exception.SmartExceptionResolver">
+		<property name="headerName" value="X-Requested-With"/>
+		<property name="headerValues" value="XMLHttpRequest"/>
+		<property name="errorView" value="smartErrorView"/>
+		<property name="order" value="1"/>	
+	</bean>
+	<!-- Default Exception Resolver -->
+	<bean class="core.fw.resolver.exception.DefaultExceptionResolver">
+		<property name="warnLogCategory" value="errorLogger"/>
+		<property name="order" value="2"/>
+		<property name="defaultErrorView" value="system/error/error"/>
+	</bean>
+
+	<!-- viewResolver Configuration  -->
+	<bean id="beanNameViewResolver" 
+	   class="org.springframework.web.servlet.view.BeanNameViewResolver">
+		<property name="order" value="1" />
+	</bean>
+	
+	<bean id="viewResolver"
+	   class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+		<property name="viewclass" value="org.springframework.web.servlet.view.JstlView" />
+		<property name="prefix" value="/WEB-INF/views/" />
+		<property name="suffix" value=".jsp" />
+		<property name="order" value="2" />
+	</bean>
+	
+	<!-- ajaxView -->
+	<bean id="smartView"
+	     class="cor.fw.view.SmartMappingJacksoJsonView"/>
+	
+	<!-- ajaxView -->
+	<bean id="smartErrorView"
+	     class="cor.fw.view.SmartExceptionView"/>
+	
+	
+	
+	<!--    
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/views/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+    -->
+	
+	
+	<!-- 
+		<resources mapping="/resources/**" location="/resources/" />
+ 	-->
+
+</beans>
