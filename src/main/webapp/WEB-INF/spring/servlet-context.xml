@@ -13,49 +13,49 @@
        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Repository"/>
     </context:component-scan>
 	
-    <!-- Argument Resolver -->
-    <mvc:annotation-driven>
-    	<mvc:argument-resolvers>
-    	    <bean class="core.fw.resolver.smartArgumentResolver"/>    	
-    	</mvc:argument-resolvers>
-    </mvc:annotation-driven>
-
-	<!-- Exception Resolver -->
-	<bean class="core.fw.resolver.exception.SmartExceptionResolver">
-		<property name="headerName" value="X-Requested-With"/>
-		<property name="headerValues" value="XMLHttpRequest"/>
-		<property name="errorView" value="smartErrorView"/>
-		<property name="order" value="1"/>	
+    <bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">   		
+   		<property name="mappings">
+   			<props>
+      			<prop key="smart.do">inBoundController</prop>
+      			<prop key="businessController">businessController</prop>
+     		</props>
+   		</property>
+   		<property name="order" value="1" />   		
 	</bean>
-	<!-- Default Exception Resolver -->
-	<bean class="core.fw.resolver.exception.DefaultExceptionResolver">
-		<property name="warnLogCategory" value="errorLogger"/>
-		<property name="order" value="2"/>
-		<property name="defaultErrorView" value="system/error/error"/>
+	
+	<bean id="handlerMapping" class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping">
+		<property name="order" value="2" />
 	</bean>
 
+
+
+	<bean name="inBoundController" class="core.fw.controller.InBoundController"/>
+	<bean name="businessController" class="core.fw.controller.BusinessController"/>
+	<bean name="OutBoundController" class="core.fw.controller.OutBoundController"/>
+
+    
 	<!-- viewResolver Configuration  -->
 	<bean id="beanNameViewResolver" 
 	   class="org.springframework.web.servlet.view.BeanNameViewResolver">
 		<property name="order" value="1" />
 	</bean>
 	
-	<bean id="viewResolver"
-	   class="org.springframework.web.servlet.view.UrlBasedViewResolver">
-		<property name="viewclass" value="org.springframework.web.servlet.view.JstlView" />
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/views/" />
 		<property name="suffix" value=".jsp" />
 		<property name="order" value="2" />
 	</bean>
 	
-	<!-- ajaxView -->
-	<bean id="smartView"
-	     class="cor.fw.view.SmartMappingJacksoJsonView"/>
 	
 	<!-- ajaxView -->
-	<bean id="smartErrorView"
+	<!-- <bean id="smartView"
+	     class="cor.fw.view.SmartMappingJacksoJsonView"/> -->
+	
+	<!-- ajaxView -->
+	<!-- <bean id="smartErrorView"
 	     class="cor.fw.view.SmartExceptionView"/>
-	
+	 -->
+	 
 	
 	
 	<!--    

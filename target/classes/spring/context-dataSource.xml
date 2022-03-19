@@ -9,10 +9,11 @@
 
 
 
+	<!-- 
   <beans:bean id="dataSourceSqlite"         class="org.springframework.jdbc.datasource.SimpleDriverDataSource" >
   		<beans:property name="driverClass" value="org.sqlite.JDBC"/>
   		<beans:property name="url" value="jdbc:sqlite:C:/sqlite/test.db"/>
   </beans:bean>
-
+ 	-->
 
 </beans:beans>
