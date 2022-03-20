@@ -42,11 +42,49 @@
 	    <artifactId>sqlite-jdbc</artifactId>
 	    <version>3.36.0.3</version>
 	</dependency>
+    <!--  mvc는 모니해볼것 -->
 	<dependency>
     	<groupId>org.springframework</groupId>
     	<artifactId>spring-webmvc</artifactId>
     	<version>${org.springframework-version}</version>
 	</dependency>
+		
+	<dependency> 
+		<groupId>org.springframework</groupId> 
+		<artifactId>spring-context</artifactId> 
+		<version>${org.springframework-version}</version>
+	</dependency>
+	
+	<!-- MyBatis start--> 
+	<dependency> 
+		<groupId>org.mybatis</groupId> 
+		<artifactId>mybatis</artifactId> 
+		<version>3.2.2</version> 
+	</dependency> 
+	<dependency> 
+		<groupId>org.mybatis</groupId> 
+		<artifactId>mybatis-spring</artifactId> 
+		<version>1.2.0</version> 
+	</dependency> 
+	<dependency> 
+		<groupId>org.springframework</groupId> 
+		<artifactId>spring-jdbc</artifactId> 
+		<version>${org.springframework-version}</version> 
+	</dependency> 
+	<dependency> 
+		<groupId>commons-dbcp</groupId> 
+		<artifactId>commons-dbcp</artifactId> 
+		<version>1.4</version> 
+	</dependency>
+	<!-- MyBatis end-->
+
+	
+	
+	<dependency>
+    	<groupId>com.google.code.gson</groupId>
+    	<artifactId>gson</artifactId>
+    <version>2.9.0</version>
+</dependency>
   </dependencies>
 
   <build>
