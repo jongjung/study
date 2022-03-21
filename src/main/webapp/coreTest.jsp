@@ -79,7 +79,7 @@
     "request_type": "S",
     "response_type": "",
     "system_code": "cor",
-    "service_code": "scormm0001"
+    "service_code": "SDEPMM0001"
   },
   "bizData": {
     "custom_id": "11111",
